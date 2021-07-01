@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--Bootstrap CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!--Our CSS-->
+    <link rel="stylesheet" href="style.css" />
+
+
+    <title>Skedool</title>
+</head>
+<body onload="loadInitialCardData()">
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Task To Your Schedule</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                          <label for="imageurl" class="form-label">Image Url</label>
+                          <input type="url" class="form-control" id="imageurl" aria-describedby="Image Url" placeholder="https://example.com/hello.jpg" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="tasktitle" class="form-label">Task Title</label>
+                            <input type="text" class="form-control" id="tasktitle" aria-describedby="Task Title" placeholder="eg: Design Program" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tasktype" class="form-label">Task Type</label>
+                            <input type="text" class="form-control" id="tasktype" aria-describedby="Task Type" placeholder="eg: Work" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="taskdescription" class="form-label">Task Description</label>
+                            <textarea rows="5" class="form-control" id="taskdescription" aria-describedby="Task Description" placeholder="Describe your task here in detail"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn__add" onclick="saveChanges()" data-bs-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--NavBar-->
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow mb-5">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="#">
+              <div class="navbar__brand__logo">
+                  <img src="https://i.pinimg.com/originals/39/1c/47/391c47459cf28f1ca70eead49c9110f6.jpg" alt="logo" class="navbar__logo">
+              </div> 
+              <strong>Skedool</strong>
+            </a>
+            <button type="button" class="btn__add fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fas fa-plus"></i>  Add New
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!--SearchBar-->
+        <div class="row justify-content-center mt-5 mb-3">
+            <div class="col-md-5">
+                <div class="search__container">
+                    <div class="input-group mb-3 shadow">
+                        <input type="text" class="form-control" placeholder="Search your Task here" aria-label="Search" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Card-->
+        <section>
+            <div class="row mt-5 mb-5 task__container">    
+            </div>
+        </section>
+    </div>
+
+    <footer class="d-md-flex align-items-center justify-content-between ps-3 pt-2 bg-light">
+        <div class="foot__media-handles d-flex gap-3 justify-content-center">
+            <a href="https://www.linkedin.com/in/hamdaanaziz/" target="_blank"><img src="assets/linkedin.svg" alt="social-media" class="media__handles"/></a>
+            <a href="https://twitter.com/HamdaanAziz" target="_blank"><img src="assets/twitter.svg" alt="social-media" class="media__handles"/> </a>
+            <a href="https://www.facebook.com/profile.php?id=100012240667420" target="_blank"><img src="assets/facebook.svg" alt="social-media" class="media__handles"/> </a>
+            <a href="https://www.instagram.com/hamdaan_aziz/" target="_blank"><img src="assets/instagram.svg" alt="social-media" class="media__handles"/></a>
+            <a href="https://github.com/ihamdaan" target="_blank"><img src="assets/github.svg" alt="social-media" class="media__handles"/></a>
+        </div>
+        <div class="footer__text justify-content-center">
+            All Rights are reserved for the team Skedool under the Copyright Act @ 2021. Developed by HAMDAAN AZIZ. 
+        </div>
+        <a class="navbar-brand fw-bold justify-content-center md-justify-content-end" href="#">
+            <div class="navbar__brand__logo">
+                <img src="https://i.pinimg.com/originals/39/1c/47/391c47459cf28f1ca70eead49c9110f6.jpg" alt="logo" class="navbar__logo">
+            </div> 
+            <strong>Skedool</strong>
+          </a>
+    </footer>
+
+    <!-- JavaScript Bundle with Popper from Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Our JavaScript -->
+    <script src="index.js"></script>
+</body>
+</html>
